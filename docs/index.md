@@ -1,4 +1,8 @@
 # Documentation
+### 👨‍🏫 [Slides from the project launch 🚀](https://docs.google.com/presentation/d/1_duVFxrriQcUvHN8soUtxBVxsjc0qbnwjrXYdlLKupc/edit?usp=sharing)
+### 📹 [YT video 🚀](https://youtu.be/kiCBao9eH5g)
+
+#
 
 ## Table of Contents
 
@@ -7,6 +11,12 @@
 #
 
 ## 1. Initial setup
+
+### Additional resources:
+* 👨‍🏫 [Slides](https://docs.google.com/presentation/d/1hxk0Rlc_VHMDvt2Sx70IdtdlJqnJ1fdEPY3DaBycbtI/edit?usp=sharing)
+* 📹 [YT video](https://youtu.be/qTRtNNbebx8)
+
+#
 
 ### Prerequisites:
 * Install NodeJS: [https://nodejs.org/en/](https://nodejs.org/en/)
