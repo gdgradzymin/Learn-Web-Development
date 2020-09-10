@@ -3,6 +3,7 @@
 ### 📹 [YT video 🚀](https://youtu.be/kiCBao9eH5g)
 ### 📰 [Medium article](https://medium.com/@sebastiandenis/learn-web-development-project-has-stared-12821a4971de)
 ### 🗺️ [Mind map](https://coggle.it/diagram/XvDejQdm23bDR7WZ/t/learn-web-dev-with-gdg)
+### 💡 [Markdown cheat sheet](https://guides.github.com/features/mastering-markdown/)
 
 #
 
@@ -10,6 +11,7 @@
 
 ### 1. [Initial setup](#initial-setup)
 ### 2. [Adding PWA support with Workbox](#Adding-PWA-support-with-Workbox)
+### 3. [HTTPS configuration form localhost](#HTTPS-configuration-form-localhost)
 
 #
 
@@ -207,6 +209,10 @@ describe('My First Test', () => {
 ```
 npm run cypress:open
 ```
+
+#
+
+#
 
 #
 
@@ -457,3 +463,135 @@ zone-evergreen.js:659 Unhandled Promise rejection: Failed to register a ServiceW
 > It is because we need to use HTTPS for the Service Worker to be registered.
 
 > We will configure everything (certificates and http-server) in the next part.
+
+#
+
+#
+
+#
+
+## HTTPS-configuration-form-localhost
+
+### 3.1. Install OpenSSL software
+
+> Go to: [https://slproweb.com/products/Win32OpenSSL.html](https://slproweb.com/products/Win32OpenSSL.html)
+
+> Download and install Win64 OpenSSL light version (MSI), you can also use direct link: [https://slproweb.com/download/Win64OpenSSL_Light-1_1_1g.msi](https://slproweb.com/download/Win64OpenSSL_Light-1_1_1g.msi)
+
+> Add this to your OS user environment variables (**OPENSSL_CONF** and into **Path**):
+
+![OpenSSL variables](imgs/openssl01.png)
+
+> After then you may need to restart your console (or even your machine). You can confirm that everything works when you type in a console:
+
+```
+openssl version
+```
+
+> It should give you a version of OpenSSL installed:
+
+```
+OpenSSL 1.1.1g  21 Apr 2020
+```
+
+### 3.2. Add a script for generating a certificate
+
+> Add this script into **package.json**:
+
+```json
+  "scripts": {
+    ...
+    "generate-local-cert": "openssl req -new -x509 -newkey rsa:2048 -sha256 -nodes -keyout ./certs/my-growth.localhost.key -days 3560 -out ./certs/my-growth.localhost.crt -config ./certs/my-growth.localhost.cnf"
+  },
+```
+
+> Our script is using **my-growth.localhost.cnf** file, so we need to add it into **my-growth/certs/** folder with this content:
+
+```
+[req]
+default_bits = 2048
+prompt = no
+default_md = sha256
+x509_extensions = v3_req
+distinguished_name = dn
+
+[dn]
+C = PL
+ST = Radzymin
+L = Radzymin
+O = GDG Radzymin
+OU = GDG Radzymin
+emailAddress = gdgradzymin@gmail.com
+CN = localhost
+
+[v3_req]
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = localhost
+DNS.2 = *.localhost
+DNS.3 = my-growth.local
+```
+
+> Now we can run our script:
+
+```
+npm run generate-local-cert
+```
+
+> **.crt** and **.key** files should be generated in **my-growth/certs** folder
+
+### 3.3. Install the certificate
+
+> On Windows go to the **my-growth/certs** folder and righ-click on **my-growth.localhost.crt** and choose "Install certificate".
+
+> Next choose "Current user".
+
+> We need to choose right store for our certificate, we need to choose: **Trusted Root Certification Authorities**
+
+### 3.4. Install http-server globally
+
+```
+npm install -g http-server
+```
+
+> Next, we will add another script for launching our app with https (scripts section inside the **package.json** file):
+
+```json
+  "scripts": {
+    ...
+    "run-https": "http-server ./dist/my-growth -a localhost -S -C ./certs/my-growth.localhost.crt -K ./certs/my-growth.localhost.key --port=4200 -o index.html"
+  }
+```
+
+> One more script will be very helpful for building everything at once:
+
+```json
+"scripts": {
+    ...
+    "build-with-sw-dev": "ng build && npm run sw-dev-webpack"
+  }
+```
+
+> Now we're ready to launch our app with https and Service Worker.
+
+> We need to build everthing first:
+
+```
+npm run build-with-sw-dev
+```
+
+> Next, we need to run http-server
+
+```
+npm run run-https
+```
+
+> The app should be launched, try to refresh it and you will see that our Service Worker is also installed (in Chrome, go to DevTools -> Application -> Service Worker):
+
+![Service Worker activated](imgs/sw01.png)
+
+> You should also see a lot of Workbox logs in the browser's console:
+
+![Workbox logs](imgs/workbox01.png)
+
