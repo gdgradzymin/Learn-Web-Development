@@ -11,7 +11,8 @@
 
 ### 1. [Initial setup](#initial-setup)
 ### 2. [Adding PWA support with Workbox](#Adding-PWA-support-with-Workbox)
-### 3. [HTTPS configuration form localhost](#HTTPS-configuration-form-localhost)
+### 3. [HTTPS configuration for localhost](#HTTPS-configuration-for-localhost)
+### 4. [Firebase Hosting](#Firebase-hosting)
 
 #
 
@@ -470,7 +471,7 @@ zone-evergreen.js:659 Unhandled Promise rejection: Failed to register a ServiceW
 
 #
 
-## HTTPS-configuration-form-localhost
+## HTTPS configuration for localhost
 
 ### 3.1. Install OpenSSL software
 
@@ -595,3 +596,135 @@ npm run run-https
 
 ![Workbox logs](imgs/workbox01.png)
 
+#
+
+#
+
+#
+
+## Firebase Hosting
+
+### 4.1. Create new Firebase project
+
+> Go to: [https://firebase.google.com/](https://firebase.google.com/)
+
+> Sign in and click on "Go to Console" (top-right corner)
+
+> Click on "+ Add project" button
+
+> Type a name for your project and click on "Next"
+
+> For Google Analytics leave everything on and click on "Next"
+
+> Select your Country, accept everything and click on "Create project"
+
+> After a while, your project is ready!!! 🚀💨🔥🤸‍♀️🕺🐱‍🏍🧙‍♂️❤
+
+> You should now see the Firebase console
+
+[<img src="imgs/firebase_console01.png" width="700px">](imgs/firebase_console01.png)
+
+### 4.2. Install Firebase CLI globally
+
+> Using terminal run npm command
+
+```
+npm install -g firebase-tools
+```
+
+> When the installation is finished, you can now sign in
+
+```
+firebase login
+```
+
+> 👉👉👉 You can also use "firebase logout" if you had Firebase CLI already installd and you have problems while getting your projects
+
+### 4.3. Init a Firebase project
+
+> Using terminal run this command
+
+```
+firebase init
+```
+
+> You will need to answer some questions
+
+```
+> Are you ready to proceed: y
+> Check only Hosting and [enter]
+> We want to use an existing project
+> Select your project
+> Type what do you want to use as your public directory: dist/my-growth
+> Configure as a SPA: y
+> Set up automatic builds and deploys with GitHub: n
+```
+
+> Firebase console will create some new files:
+
+```
+firebase.json
+.firebaserc
+```
+
+> We need to tell Git that it should ignore some files (edit file .gitignore and this at the end)
+
+```
+### Firebase ###
+**/.firebaserc
+
+### Firebase Patch ###
+.runtimeconfig.json
+.firebase/
+```
+
+### 4.4. Deploy your project to Firebase Hosting 🚀🚀🚀
+
+> Before we will deploy our project we need to build it (and also build our Service Worker)
+
+> But first, add a new script into the package.json file for production build with Service Worker
+
+```json
+{
+  "name": "my-growth",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    ...
+    "build-prod-with-sw": "ng build --prod && npm run sw-prod-webpack"
+  },
+  ...
+}
+```
+
+> Ok, we're ready to build our app, but for now, we're not going to use our new script, we're going to build our app with --prod flag but our Service Worker for development - just to see some logs 🤩
+
+```
+ng build --prod
+```
+
+> We're going to build the Service Worker using our prepared scripts (for now let's use dev script)
+
+```
+npm run sw-dev-webpack
+```
+
+> And now you are ready to 🚀
+
+```
+firebase deploy
+```
+
+> The last thing you need to do is to check if everything is ok and our app is online
+
+> Use the Hosting URL you get from Firebase CLI
+
+[<img src="imgs/firebase_deploy01.png">](imgs/firebase_deploy01.png)
+
+👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆
+
+> Open the URL and you should see your app and inside DevTools -> Console you should see some Workbox logs 👏👏👏
+
+[<img src="imgs/app_deployed01.png" width="500px">](imgs/app_deployed01.png)
+
+> 👉👉👉 You can check our app here: [https://my-growth-5f0ab.web.app](https://my-growth-5f0ab.web.app)
