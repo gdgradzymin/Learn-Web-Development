@@ -1,0 +1,110 @@
+{
+    "name": "My Growth",
+    "short_name": "My Growth",
+    "description": "Improve your life and take it to the next level 🚀",
+    "theme_color": "#9c27b0",
+    "background_color": "#ffffff",
+    "lang": "English",
+    "display": "standalone",
+    "orientation": "any",
+    "scope": "/",
+    "start_url": "/",
+    "icons": [
+      {
+        "src": "/assets/icons/manifest-icon-72.png",
+        "sizes": "72x72",
+        "type": "image/png",
+        "purpose": "maskable"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-96.png",
+        "sizes": "96x96",
+        "type": "image/png",
+        "purpose": "maskable"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-128.png",
+        "sizes": "128x128",
+        "type": "image/png",
+        "purpose": "maskable"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-144.png",
+        "sizes": "144x144",
+        "type": "image/png",
+        "purpose": "maskable"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-152.png",
+        "sizes": "152x152",
+        "type": "image/png",
+        "purpose": "maskable"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-192.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "maskable"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-384.png",
+        "sizes": "384x384",
+        "type": "image/png",
+        "purpose": "maskable"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "maskable"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-72-any.png",
+        "sizes": "72x72",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-96-any.png",
+        "sizes": "96x96",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-128-any.png",
+        "sizes": "128x128",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-144-any.png",
+        "sizes": "144x144",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-152-any.png",
+        "sizes": "152x152",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-192-any.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-384-any.png",
+        "sizes": "384x384",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-512-any.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any"
+      }
+    ]
+  }

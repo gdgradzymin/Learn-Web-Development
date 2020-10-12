@@ -13,6 +13,7 @@
 ### 2. [Adding PWA support with Workbox](#Adding-PWA-support-with-Workbox)
 ### 3. [HTTPS configuration for localhost](#HTTPS-configuration-for-localhost)
 ### 4. [Firebase Hosting](#Firebase-hosting)
+### 5. [Manifest file](#Manifest-file)
 
 #
 
@@ -728,3 +729,259 @@ firebase deploy
 [<img src="imgs/app_deployed01.png" width="500px">](imgs/app_deployed01.png)
 
 > 👉👉👉 You can check our app here: [https://my-growth-5f0ab.web.app](https://my-growth-5f0ab.web.app)
+
+#
+
+#
+
+#
+
+## Manifest file
+
+### 4.1. Create new manifest file
+
+> We need a manifest file to "unlock" a hidden PWA power, called "Installability" 🔥🔥🔥💪
+
+> The manifest file holds the basic configuration for a PWA app, that can be used then by the OS or the web browser.
+
+> More about the manifest file you can read here: [https://web.dev/add-manifest/](https://web.dev/add-manifest/)
+
+> Ok, let's create the manifest file for our app, we're going to name it **manifest.webmanifest** and it will be placed at the same directory level as **index.html**
+
+> manifest.webmanifest
+
+```json
+{
+    "name": "My Growth",
+    "short_name": "My Growth",
+    "description": "Improve your life and take it to the next level 🚀",
+    "theme_color": "#9c27b0",
+    "background_color": "#ffffff",
+    "lang": "English",
+    "display": "standalone",
+    "orientation": "any",
+    "scope": "/",
+    "start_url": "/",
+    "icons": [
+      {
+        "src": "/assets/icons/manifest-icon-72.png",
+        "sizes": "72x72",
+        "type": "image/png",
+        "purpose": "maskable"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-96.png",
+        "sizes": "96x96",
+        "type": "image/png",
+        "purpose": "maskable"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-128.png",
+        "sizes": "128x128",
+        "type": "image/png",
+        "purpose": "maskable"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-144.png",
+        "sizes": "144x144",
+        "type": "image/png",
+        "purpose": "maskable"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-152.png",
+        "sizes": "152x152",
+        "type": "image/png",
+        "purpose": "maskable"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-192.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "maskable"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-384.png",
+        "sizes": "384x384",
+        "type": "image/png",
+        "purpose": "maskable"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "maskable"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-72-any.png",
+        "sizes": "72x72",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-96-any.png",
+        "sizes": "96x96",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-128-any.png",
+        "sizes": "128x128",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-144-any.png",
+        "sizes": "144x144",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-152-any.png",
+        "sizes": "152x152",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-192-any.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-384-any.png",
+        "sizes": "384x384",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/assets/icons/manifest-icon-512-any.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any"
+      }
+    ]
+  }
+```
+
+> We need to add our icons to the "icons" folder inside "assets"
+
+> You can read more about maskable icons here: [https://web.dev/maskable-icon/](https://web.dev/maskable-icon/)
+
+> And checkout this very handy tool: [https://maskable.app/editor](https://maskable.app/editor)
+
+> Now we need include the manifest file in our index.html
+
+```html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>MyGrowth</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link rel="manifest" href="/manifest.webmanifest">
+  
+</head>
+<body class="mat-typography">
+  <myg-root></myg-root>
+</body>
+</html>
+```
+
+> And we also need to update our angular.json file, find each "assets" section occurrence (build and test) and and "manifest.webmanifest"
+
+```json
+  "assets": [
+    "src/favicon.ico",
+    "src/assets",
+    "src/manifest.webmanifest"
+    ]
+```
+> We also need to replace favicon.ico with our new version
+
+> Now we're ready to add some additional properties to our index.html file (for iOS support, but not only)
+
+```html
+  <!-- generics -->
+  <link rel="icon" type="image/png" sizes="196x196" href="assets/icons/favicon-196.png">
+
+  <meta name="mobile-web-app-capable" content="yes" />
+
+  <!-- iOS & macOS-->
+  <link rel="apple-touch-icon" href="assets/icons/apple-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-icon-180.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="assets/icons/apple-icon-167.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="assets/icons/apple-icon-152.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="assets/icons/apple-icon-120.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="My Growth">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="theme-color" content="#9c27b0">
+```
+
+> Now everything is almost ready - almost 😏
+
+> For better iOS support we need to create splash screen files for different screen sizes 😤
+
+> We can generate it manually or use a tool like [https://apetools.webprofusion.com/](https://apetools.webprofusion.com/)
+
+> The best place to store these files is CDN, but for now we will store it in our app **assets/splash-screens**
+
+> And we need to update the **index.html** file then
+
+```html
+<!-- iOS splash screens -->
+<!-- iPad Pro 3 12.9" (2048px x 2732px) -->
+  <link rel="apple-touch-startup-image" href="assets/splash-screens/apple-splash-2048-2732.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+  <link rel="apple-touch-startup-image" href="assets/splash-screens/apple-splash-2732-2048.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+  <!-- iPad Pro 2 11" (1668px x 2388px) -->
+  <link rel="apple-touch-startup-image" href="assets/splash-screens/apple-splash-1668-2388.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+  <link rel="apple-touch-startup-image" href="assets/splash-screens/apple-splash-2388-1668.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+  <!-- iPad Pro 1 (1668px x 2224px) -->
+  <link rel="apple-touch-startup-image" href="assets/splash-screens/apple-splash-1668-2224.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+  <link rel="apple-touch-startup-image" href="assets/splash-screens/apple-splash-2224-1668.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+  <!-- iPad 10.2 2019 (1620px x 2160px) -->
+  <link rel="apple-touch-startup-image" href="assets/splash-screens/apple-splash-1620-2160.png" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+  <link rel="apple-touch-startup-image" href="assets/splash-screens/apple-splash-2160-1620.png" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+  <!-- iPad Mini, Air (1536px x 2048px) -->
+  <link rel="apple-touch-startup-image" href="assets/splash-screens/apple-splash-1536-2048.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+  <link rel="apple-touch-startup-image" href="assets/splash-screens/apple-splash-2048-1536.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+  <!-- iPhone XS Max (1242px x 2688px) -->
+  <link rel="apple-touch-startup-image" href="assets/splash-screens/apple-splash-1242-2688.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+  <link rel="apple-touch-startup-image" href="assets/splash-screens/apple-splash-2688-1242.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)">
+  <!-- iPhone X (1125px x 2436px) -->
+  <link rel="apple-touch-startup-image" href="assets/splash-screens/apple-splash-1125-2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+  <link rel="apple-touch-startup-image" href="assets/splash-screens/apple-splash-2436-1125.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)">
+  <!-- iPhone XR (1242px x 2688px) -->
+  <link rel="apple-touch-startup-image" href="assets/splash-screens/apple-splash-828-1792.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+  <link rel="apple-touch-startup-image" href="assets/splash-screens/apple-splash-1792-828.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+  <!-- iPhone 8 Plus, 7 Plus, 6s Plus, 6 Plus (1242px x 2208px) -->
+  <link rel="apple-touch-startup-image" href="assets/splash-screens/apple-splash-1242-2208.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+  <link rel="apple-touch-startup-image" href="assets/splash-screens/apple-splash-2208-1242.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)">
+  <!-- iPhone 8, 7, 6s, 6 (750px x 1334px) -->
+  <link rel="apple-touch-startup-image" href="assets/splash-screens/apple-splash-750-1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+  <link rel="apple-touch-startup-image" href="assets/splash-screens/apple-splash-1334-750.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+  <!-- iPhone 5 (640px x 1136px) -->
+  <link rel="apple-touch-startup-image" href="assets/splash-screens/apple-splash-640-1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+  <link rel="apple-touch-startup-image" href="assets/splash-screens/apple-splash-1136-640.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+```
+
+> And that is all 👏👏👏
+
+> Now we need to build it with Service Worker, publish it, and we should be able to install the app
+
+> 🛑 But remember: installation is only possible with HTTPS, so you need to publish it somewhere (Firebase Hosting)
+
+> Check how it works: [https://my-growth-5f0ab.web.app](https://my-growth-5f0ab.web.app)
+
+> Windows Chrome
+
+[<img src="imgs/app_installable01.png" width="500px">](imgs/app_installable01.png)
+
+> On Android
+
+[<img src="imgs/app_icon_android01.png" width="400px">](imgs/app_icon_android01.png)
