@@ -388,7 +388,7 @@ npm run sw-dev-webpack
 
 ### 2.5. Include the Service Worker file in our app (main.ts)
 
-> In the  **my-growth/src.main.ts** file add this function that registers our SW:
+> In the  **my-growth/src/main.ts** file add this function that registers our SW:
 
 ```typescript
 import { Workbox } from 'workbox-window';
